@@ -1,0 +1,10 @@
+---
+- hosts: system_a
+  roles:
+    - system_a
+    - common
+
+- hosts: system_b
+  roles:
+    - system_b
+    - common
