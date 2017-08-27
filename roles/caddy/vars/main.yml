@@ -1,0 +1,7 @@
+caddy_group: "www-data"
+caddy_path: "/usr/local/bin/caddy"
+caddy_user: "www-data"
+www_dir: "/var/www"
+caddyfile_path: "/etc/caddy/Caddyfile"
+certificate_dir: "/etc/ssl/caddy"
+home: "{{ ansible_env.HOME }}"

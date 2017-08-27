@@ -1,5 +1,0 @@
----
-- name: Copy hello_world.txt
-  copy:
-    src: "hello_world_common.txt"
-    dest: "{{ home }}/hello_world_common.txt"

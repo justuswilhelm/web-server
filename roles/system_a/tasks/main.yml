@@ -1,8 +1,0 @@
-- name: Echo some things
-  shell: "{{ item }}"
-  with_items: "{{ things_to_echo }}"
-
-- name: Copy hello_world_a.txt
-  copy:
-    src: "hello_world_a.txt"
-    dest: "{{ home }}/hello_world_a.txt"

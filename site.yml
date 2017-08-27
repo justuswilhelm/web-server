@@ -1,10 +1,4 @@
 ---
-- hosts: system_a
+- hosts: webserver
   roles:
-    - system_a
-    - common
-
-- hosts: system_b
-  roles:
-    - system_b
-    - common
+    - caddy

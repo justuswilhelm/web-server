@@ -1,0 +1,88 @@
+---
+- name: Download caddy
+  get_url:
+    url: "https://caddyserver.com/download/linux/amd64"
+    dest: "/tmp/caddy.tar.xz"
+
+- name: Unpack caddy archive
+  unarchive:
+    src: "/tmp/caddy.tar.xz"
+    dest: "/tmp/"
+    creates: "/tmp/caddy"
+    remote_src: yes
+
+- name: Copy caddy
+  file:
+    src: "/tmp/caddy"
+    dest: "/usr/local/bin/caddy"
+    state: file
+    mode: "755"
+    owner: root
+    group: root
+
+- name: Set caddy capabilities
+  capabilities:
+    path: "/usr/local/bin/caddy"
+    capability: cap_net_bind_service=+ep
+    state: present
+
+- name: Add caddy user group
+  group:
+    name: "{{ caddy_group }}"
+    gid: 33
+
+- name: Add caddy user
+  user:
+    name: "{{ caddy_user }}"
+    uid: 33
+    group: "{{ caddy_group }}"
+    system: yes
+    shell: /usr/sbin/nologin
+    home: "{{ www_dir }}"
+    createhome: no
+
+- name: Create caddy user home directory
+  file:
+    dest: "{{ www_dir }}"
+    state: directory
+    owner: "{{ caddy_user }}"
+    group: "{{ caddy_group }}"
+    mode: "555"
+
+- name: Add caddy folder
+  file:
+    dest: /etc/caddy
+    state: directory
+    owner: root
+    group: "{{ caddy_group }}"
+
+- name: Add caddy certificate folder
+  file:
+    dest: "{{ certificate_dir }}"
+    state: directory
+    owner: "{{ caddy_user }}"
+    group: root
+    mode: "0770"
+
+- name: Copy Caddyfile
+  template:
+    src: Caddyfile
+    dest: "{{ caddyfile_path }}"
+    owner: "{{ caddy_user }}"
+    group: "{{ caddy_group }}"
+    mode: "444"
+
+- name: Copy Caddy systemd
+  template:
+    src: caddy.service
+    dest: /etc/systemd/system/caddy.service
+    mode: "644"
+    owner: root
+    group: root
+
+- name: Load caddy
+  systemd:
+    state: reloaded
+    daemon_reload: yes
+    name: caddy.service
+    enabled: yes
