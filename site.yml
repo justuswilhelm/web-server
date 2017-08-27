@@ -1,4 +1,5 @@
 ---
 - hosts: webserver
   roles:
+    - os
     - caddy
