@@ -8,8 +8,8 @@ Wants=network-online.target systemd-networkd-wait-online.service
 Restart=on-abnormal
 
 ; User and group the process will run as.
-User="{{ caddy_user }}"
-Group="{{ caddy_group }}"
+User={{ caddy_user }}
+Group={{ caddy_group }}
 
 ; Letsencrypt-issued certificates will be written to this directory.
 Environment=CADDYPATH={{ certificate_dir }}
