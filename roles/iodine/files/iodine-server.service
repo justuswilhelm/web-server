@@ -1,0 +1,10 @@
+[Unit]
+Description=Iodine Server
+After=local-fs.target network.target
+
+[Service]
+ExecStart=/usr/local/sbin/iodined -i 30 -f $OPTIONS
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

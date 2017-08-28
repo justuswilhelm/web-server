@@ -1,0 +1,55 @@
+---
+- include_vars: secret.yml
+- name: Download iodine
+  git:
+    repo: "{{ iodine_git }}"
+    dest: "{{ iodine_dir }}"
+
+- name: Compile iodine
+  make:
+    chdir: "{{ iodine_dir }}"
+    target: "{{ item }}"
+  with_items:
+    - all
+    - install
+
+- name: Copy iodine service file
+  copy:
+    src: "iodine-server.service"
+    dest: "/etc/systemd/system/iodine-server.service"
+    mode: "644"
+    owner: root
+    group: root
+
+- name: Copy iodine socket file
+  copy:
+    src: "iodine-server.socket"
+    dest: "/etc/systemd/system/iodine-server.socket"
+    mode: "644"
+    owner: root
+    group: root
+
+- name: Create iodine systemd config folder
+  file:
+    dest: /etc/systemd/system/iodine-server.service.d
+    state: directory
+    owner: root
+
+- name: Copy iodine systemd config file
+  template:
+    src: "local.conf"
+    dest: /etc/systemd/system/iodine-server.service.d/local.conf
+    owner: root
+
+- name: Load iodine service
+  systemd:
+    state: reloaded
+    daemon_reload: yes
+    name: iodine-server.service
+    enabled: yes
+
+- name: Load iodine socket
+  systemd:
+    daemon_reload: yes
+    name: iodine-server.socket
+    enabled: yes

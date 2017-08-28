@@ -1,0 +1,4 @@
+iodine_git: "https://github.com/yarrick/iodine.git"
+iodine_dir: /tmp/iodine
+iodine_domain: t1.justus.pw
+iodine_ip: 192.168.1.99
