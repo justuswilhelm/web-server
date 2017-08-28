@@ -82,7 +82,7 @@
 
 - name: Load caddy
   systemd:
-    state: reloaded
+    state: restarted
     daemon_reload: yes
     name: caddy.service
     enabled: yes

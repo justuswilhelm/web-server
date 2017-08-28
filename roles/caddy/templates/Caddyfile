@@ -1,5 +1,5 @@
 https://www.justus.pw, https://justusperlwitz.com, https://www.justusperlwitz.com {
-    log /var/log/caddy-redirect.log
+    log stderr
     redir https://justus.pw{uri}
     tls {
         max_certs 10
@@ -9,14 +9,14 @@ https://www.justus.pw, https://justusperlwitz.com, https://www.justusperlwitz.co
 https://justus.pw {
     root {{ www_dir }}/justus.pw
     gzip
-    log /var/log/caddy.log
+    log stderr
     tls {
         max_certs 10
     }
 }
 
 https://www.datakernel.co {
-    log /var/log/caddy-redirect.log
+    log stderr
     redir https://datakernel.pw{uri}
     tls {
         max_certs 10
@@ -26,7 +26,7 @@ https://www.datakernel.co {
 https://datakernel.co {
     root {{ www_dir }}/datakernel.co
     gzip
-    log /var/log/caddy.log
+    log stderr
     tls {
         max_certs 10
     }
