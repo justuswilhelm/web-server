@@ -43,7 +43,7 @@
 
 - name: Load iodine service
   systemd:
-    state: reloaded
+    state: restarted
     daemon_reload: yes
     name: iodine-server.service
     enabled: yes
