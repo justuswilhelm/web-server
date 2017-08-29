@@ -2,4 +2,7 @@
 
 ## Quickstart
 
-First, you need to populate the hosts file
+```
+printf "[webserver]\njustus.pw ansible_user=root" > hosts
+ansible-playbook site.yml -i hosts
+```
