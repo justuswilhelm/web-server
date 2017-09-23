@@ -1,4 +1,5 @@
 iodine_git: "https://github.com/yarrick/iodine.git"
 iodine_dir: /tmp/iodine
-iodine_domain: iodine.do.justus.pw
+iodine_domain: t1.justus.pw
 iodine_ip: 192.168.1.99
+iodine_external_ip: 67.207.75.149

@@ -21,14 +21,6 @@
     owner: root
     group: root
 
-- name: Copy iodine socket file
-  copy:
-    src: "iodine-server.socket"
-    dest: "/etc/systemd/system/iodine-server.socket"
-    mode: "644"
-    owner: root
-    group: root
-
 - name: Create iodine systemd config folder
   file:
     dest: /etc/systemd/system/iodine-server.service.d
@@ -48,8 +40,8 @@
     name: iodine-server.service
     enabled: yes
 
-- name: Load iodine socket
-  systemd:
-    daemon_reload: yes
-    name: iodine-server.socket
-    enabled: yes
+- name: Ensure iodine works locally
+  script: check_local.sh
+  environment:
+    IODINE_DOMAIN: "{{ iodine_domain }}"
+    IODINE_PASS: "{{ iodine_password }}"
