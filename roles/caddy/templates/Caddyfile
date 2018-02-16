@@ -17,7 +17,7 @@ https://justus.pw {
 
 https://www.datakernel.co {
     log stderr
-    redir https://datakernel.pw{uri}
+    redir https://datakernel.co{uri}
     tls {
         max_certs 10
     }
